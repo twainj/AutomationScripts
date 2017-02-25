@@ -1,3 +1,4 @@
+Start-Transcript -path $home\system_install.log -Append
 # This is necessary to execute scripts. If the system complains that it can't run this script, 
 # you might have to run this line by itself first.
 set-executionpolicy remotesigned -scope currentuser -force
@@ -21,3 +22,4 @@ Add-Content "$home\.gitconfig" "`n[credential ""$gitRepo""]`n`t$gitUname = $gitP
 
 git clone $gitRepo "$projDirectory\Repository"
 Install-BoxstarterPackage -PackageName "$projDirectory\Repository\system_install\system_package.ps1"
+Stop-Transcript
