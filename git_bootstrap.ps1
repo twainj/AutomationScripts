@@ -17,6 +17,7 @@ iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.co
 Get-Boxstarter -Force
 Import-Module $env:appdata\boxstarter\boxstarter.chocolatey\boxstarter.chocolatey.psd1
 cinst git -y
+cins git-disable-gcm
 $env:path += 'C:\Program Files\git\bin'
 echo "Git credentials are being stored in $home\.gitconfig..."
 Add-Content "$home\.gitconfig" "`n[credential ""$gitRepo""]`n`t$gitUname = $gitPass"
