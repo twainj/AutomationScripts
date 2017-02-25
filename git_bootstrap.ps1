@@ -22,6 +22,6 @@ $env:path += 'C:\Program Files\git\bin'
 echo "Git credentials are being stored in $home\.gitconfig..."
 #Add-Content "$home\.gitconfig" "`n[credential ""$gitRepo""]`n`t$gitUname = $gitPass"
 
-git clone "https://$gitUname:$gitPass@$gitRepo" "$projDirectory\Repository"
+git clone "https://${gitUname}:${gitPass}@$gitRepo" "$projDirectory\Repository"
 Install-BoxstarterPackage -PackageName "$projDirectory\Repository\system_install\system_package.ps1"
 Stop-Transcript
