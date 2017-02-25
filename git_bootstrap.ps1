@@ -6,7 +6,7 @@ set-executionpolicy remotesigned -scope currentuser -force
 echo 'First I need to get a few things from you...'
 $projDirectory = Read-Host -Prompt 'Project Directory (relative to $home)'
 $projDirectory = "$home\$projDirectory"
-$gitRepo = Read-Host -Prompt 'Git Repo'
+$gitRepo = Read-Host -Prompt 'Git Repo (w/o "https://")'
 $gitUname = Read-Host -Prompt 'Git Username'
 $secGitPass = Read-Host -Prompt 'Git Pass' -AsSecureString
 $gitPass = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($secGitPass))
@@ -20,8 +20,8 @@ cinst git -y
 cinst git-disable-gcm -y
 $env:path += 'C:\Program Files\git\bin'
 echo "Git credentials are being stored in $home\.gitconfig..."
-Add-Content "$home\.gitconfig" "`n[credential ""$gitRepo""]`n`t$gitUname = $gitPass"
+#Add-Content "$home\.gitconfig" "`n[credential ""$gitRepo""]`n`t$gitUname = $gitPass"
 
-git clone $gitRepo "$projDirectory\Repository"
+git clone "https://$gitUname:$gitPass@$gitRepo" "$projDirectory\Repository"
 Install-BoxstarterPackage -PackageName "$projDirectory\Repository\system_install\system_package.ps1"
 Stop-Transcript
